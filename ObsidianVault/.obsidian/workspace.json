@@ -4,34 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "1d2b6d1e00b53e26",
+        "id": "10b02d3536ccc63b",
         "type": "tabs",
         "children": [
           {
-            "id": "ed0214ab46df01f0",
+            "id": "7f9690776d94737b",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Untitled 1.base",
-                "viewName": "Table"
+                "file": "BabaTemple.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "Untitled 1"
-            }
-          },
-          {
-            "id": "c695b01b2df684b6",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "BabaTemple"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -196,11 +186,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c695b01b2df684b6",
+  "active": "7f9690776d94737b",
   "lastOpenFiles": [
     "Untitled 1.base",
-    "Untitled.base",
+    "BabaTemple.md",
     "Direct_Test.md",
+    "Untitled.base",
     "2026-08-23.md"
   ]
 }

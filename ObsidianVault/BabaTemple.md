@@ -1,0 +1,2 @@
+- Create list of items needed for outdoor cat6e run for gates
+- Setup bridges for cameras
