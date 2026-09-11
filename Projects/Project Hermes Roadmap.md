@@ -1,9 +1,7 @@
 ---
 title: "Project Hermes Roadmap"
-date: 2026-09-08 20:50:40
+date: 2026-09-11 06:52:53
 tags: [project, ai]
 ---
 
-Step 1 is Matrix bot
-Step 2 is Obsidian integration
-Step 3 is Voice assistant
+Step 1 is Matrix bot\nStep 2 is Obsidian integration\nStep 3 is Voice assistant
