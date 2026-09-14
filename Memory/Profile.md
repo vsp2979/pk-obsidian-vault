@@ -3,3 +3,7 @@
 - [PERSONAL] My favorite hobby is home automation *(saved 2026-09-13)*
 - [MANUAL] my office is Plano Texas *(saved 2026-09-13)*
 - [PERSONAL] User has a dog *(saved 2026-09-13)*
+- [MANUAL] my dog is Havanese and his name is Truffles *(saved 2026-09-13)*
+- [PERSONAL] User has a dog named Truffles *(saved 2026-09-13)*
+- [PERSONAL] User's dog is Havanese *(saved 2026-09-13)*
+- [PERSONAL] User has a pet *(saved 2026-09-13)*
