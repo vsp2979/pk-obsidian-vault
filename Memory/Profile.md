@@ -1,0 +1,1 @@
+- [PERSONAL] User favorite food is Thai green curry *(saved 2026-09-13)*
