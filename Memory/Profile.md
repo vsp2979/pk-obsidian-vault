@@ -1,1 +1,4 @@
 - [PERSONAL] User favorite food is Thai green curry *(saved 2026-09-13)*
+- [PERSONAL] User's favorite hobby is home automation *(saved 2026-09-13)*
+- [PERSONAL] My favorite hobby is home automation *(saved 2026-09-13)*
+- [MANUAL] my office is Plano Texas *(saved 2026-09-13)*
