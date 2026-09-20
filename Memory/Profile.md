@@ -8,3 +8,4 @@
 - [PERSONAL] User's dog is Havanese *(saved 2026-09-13)*
 - [PERSONAL] User has a pet *(saved 2026-09-13)*
 - Praveen likes his coffee black with medium roast and freshly ground *(Learned: 2026-09-20 10:09)*
+- My primary cloud provider is Oracle Cloud Infrastructure *(Learned: 2026-09-20 10:15)*
