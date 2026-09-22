@@ -2,3 +2,8 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache/
 .DS_Store
+.env
+*.pem
+*.key
+auth_info_baileys/
+secretary.db
