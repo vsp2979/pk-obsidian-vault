@@ -27,3 +27,4 @@
 - My car is a Tesla Model 3 and I charge it at home. *(Learned: 2026-09-20 10:57)*
 - My car is a Tesla Model 3 and I charge it at home. *(Learned: 2026-09-20 10:57)*
 - My car is a Tesla Model 3 and I charge it at home. *(Learned: 2026-09-20 10:59)*
+- Praveen likes Thai green curry *(Learned: 2026-09-22 11:00)*
