@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniView360 — Insta360 Video Studio & Zero-App Publisher</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <div>
+          <h2>OmniView 360</h2>
+          <span class="subtitle">Insta360 Studio & WebShare</span>
+        </div>
+      </div>
+
+      <nav class="nav-steps">
+        <button class="nav-item active" data-step="1">
+          <span class="step-num">1</span>
+          <div class="step-meta">
+            <strong>Import Camera Video</strong>
+            <small>Insta360 .insv / .mp4</small>
+          </div>
+        </button>
+        <button class="nav-item" data-step="2">
+          <span class="step-num">2</span>
+          <div class="step-meta">
+            <strong>Clean & Trim</strong>
+            <small>Color, Exposure & Filters</small>
+          </div>
+        </button>
+        <button class="nav-item" data-step="3">
+          <span class="step-num">3</span>
+          <div class="step-meta">
+            <strong>Music & Smart Ducking</strong>
+            <small>Enhance Background Audio</small>
+          </div>
+        </button>
+        <button class="nav-item" data-step="4">
+          <span class="step-num">4</span>
+          <div class="step-meta">
+            <strong>Publish & Share 360</strong>
+            <small>Zero-App Web & YouTube</small>
+          </div>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-card" id="systemStatus">
+          <div class="status-dot online"></div>
+          <div>
+            <div class="status-title">Engine Ready</div>
+            <div class="status-detail" id="ffmpegStatus">FFmpeg 9.0.2 Active</div>
+          </div>
+        </div>
+        <div class="wifi-share-box">
+          <small>Home Wi-Fi Share Link:</small>
+          <code id="lanShareUrl">http://localhost:8080</code>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <h1 id="stepHeading">Step 1: Import Video from Camera</h1>
+        <div class="top-actions">
+          <button class="btn btn-secondary" id="btnScanDevices">
+            <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Detect Camera
+          </button>
+        </div>
+      </header>
+
+      <!-- Step Containers -->
+      <div class="wizard-container">
+        
+        <!-- STEP 1: IMPORT -->
+        <section class="wizard-step active" id="step1">
+          <div class="cards-grid">
+            <!-- Detection card -->
+            <div class="card">
+              <h3>Camera & SD Card Devices</h3>
+              <p class="hint">Connect your Insta360 camera via USB or insert the MicroSD card into your Mac.</p>
+              <div id="deviceList" class="device-list">
+                <div class="empty-state">No camera card detected yet. Click "Detect Camera" or drag files below.</div>
+              </div>
+            </div>
+
+            <!-- Upload Card -->
+            <div class="card">
+              <h3>Direct Upload or Local File</h3>
+              <div class="drop-zone" id="videoDropZone">
+                <svg viewBox="0 0 24 24" class="drop-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <p>Drag & drop your Insta360 <strong>.insv</strong> or <strong>.mp4</strong> file here</p>
+                <span>or</span>
+                <label class="btn btn-primary file-label">
+                  Browse Files
+                  <input type="file" id="videoFileInput" accept=".insv,.mp4,.mov" hidden>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Imported files list -->
+          <div class="card mt-20">
+            <h3>Ready for Processing</h3>
+            <div id="rawFilesList" class="file-table-container">
+              <p class="hint">No videos loaded yet.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 2: CLEAN & TRIM -->
+        <section class="wizard-step" id="step2">
+          <div class="grid-2col">
+            <!-- Video Preview Player -->
+            <div class="card">
+              <h3>Source Video Preview</h3>
+              <div class="video-preview-wrapper">
+                <video id="sourceVideoPlayer" controls playsinline></video>
+              </div>
+              <div class="timeline-trimmer">
+                <div class="trim-inputs">
+                  <div class="input-field">
+                    <label>Trim Start (sec):</label>
+                    <input type="number" id="trimStart" value="0.0" min="0" step="0.5">
+                  </div>
+                  <div class="input-field">
+                    <label>Trim End (sec):</label>
+                    <input type="number" id="trimEnd" placeholder="Total length" step="0.5">
+                  </div>
+                </div>
+                <small class="hint">Tip: Cut out the first 2-3 seconds to remove hands setting up the camera/selfie stick.</small>
+              </div>
+            </div>
+
+            <!-- Cleaning & Enhancement Controls -->
+            <div class="card">
+              <h3>Image & Exposure Cleaning</h3>
+              
+              <div class="slider-control">
+                <div class="slider-label">
+                  <span>Brightness:</span>
+                  <span id="brightnessVal">0.0</span>
+                </div>
+                <input type="range" id="brightnessInput" min="-0.3" max="0.3" step="0.02" value="0.0">
+              </div>
+
+              <div class="slider-control">
+                <div class="slider-label">
+                  <span>Contrast:</span>
+                  <span id="contrastVal">1.0</span>
+                </div>
+                <input type="range" id="contrastInput" min="0.7" max="1.4" step="0.05" value="1.0">
+              </div>
+
+              <div class="slider-control">
+                <div class="slider-label">
+                  <span>Saturation (Vibrancy):</span>
+                  <span id="saturationVal">1.0</span>
+                </div>
+                <input type="range" id="saturationInput" min="0.5" max="1.6" step="0.05" value="1.0">
+              </div>
+
+              <div class="filter-toggles mt-20">
+                <label class="toggle-control">
+                  <input type="checkbox" id="sharpnessToggle" checked>
+                  <span class="toggle-slider"></span>
+                  <span>Enhance 360 Sharpness & Clarity</span>
+                </label>
+                <label class="toggle-control">
+                  <input type="checkbox" id="windFilterToggle" checked>
+                  <span class="toggle-slider"></span>
+                  <span>Remove Wind Rumble & Mic Handling Noise</span>
+                </label>
+              </div>
+
+              <div class="input-field mt-20">
+                <label>Target 360 Output Resolution:</label>
+                <select id="resolutionSelect">
+                  <option value="4k" selected>4K 360 (3840x1920) - Optimal Quality & Web Speed</option>
+                  <option value="1080p">1080p 360 (1920x960) - Lightweight / Mobile Friendly</option>
+                  <option value="5.7k">5.7K 360 (Original Maximum)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 3: MUSIC & DUCKING -->
+        <section class="wizard-step" id="step3">
+          <div class="grid-2col">
+            <div class="card">
+              <h3>Background Music Soundtrack</h3>
+              <p class="hint">Upload any song or royalty-free track (.mp3, .m4a, .wav). It will seamlessly loop or trim to match your video length.</p>
+              
+              <div class="drop-zone compact" id="musicDropZone">
+                <svg viewBox="0 0 24 24" class="drop-icon"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <p>Drop audio file (.mp3 / .wav / .m4a)</p>
+                <label class="btn btn-secondary file-label mt-10">
+                  Select Music Track
+                  <input type="file" id="musicFileInput" accept=".mp3,.wav,.m4a,.aac" hidden>
+                </label>
+              </div>
+
+              <div id="musicFileList" class="music-list mt-15">
+                <small class="hint">No music chosen yet. The video's original ambient sound will be kept.</small>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Smart Audio Balancing & Ducking</h3>
+              
+              <div class="slider-control">
+                <div class="slider-label">
+                  <span>Camera Ambient / Voices Volume:</span>
+                  <span id="cameraVolVal">100%</span>
+                </div>
+                <input type="range" id="cameraVolInput" min="0" max="2" step="0.1" value="1.0">
+              </div>
+
+              <div class="slider-control">
+                <div class="slider-label">
+                  <span>Background Music Volume:</span>
+                  <span id="musicVolVal">40%</span>
+                </div>
+                <input type="range" id="musicVolInput" min="0" max="1.5" step="0.05" value="0.4">
+              </div>
+
+              <div class="feature-box mt-20">
+                <div class="feature-header">
+                  <label class="toggle-control">
+                    <input type="checkbox" id="duckingToggle" checked>
+                    <span class="toggle-slider"></span>
+                    <strong>Smart Voice Ducking</strong>
+                  </label>
+                </div>
+                <p class="hint mt-10">
+                  Automatically attenuates music volume by -12dB whenever someone speaks, and smoothly swells the soundtrack back up when they finish!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 4: PUBLISH & SHARE -->
+        <section class="wizard-step" id="step4">
+          <div class="card">
+            <div class="publish-header">
+              <div>
+                <h2>Interactive 360° Preview & One-Click Publisher</h2>
+                <p class="hint">Test your 360 view right here by dragging or swiping, then publish for friends & family.</p>
+              </div>
+              <div class="input-field" style="max-width: 320px;">
+                <label>Video Title for Friends:</label>
+                <input type="text" id="projectTitleInput" value="My 360 Trip Experience">
+              </div>
+            </div>
+
+            <!-- In-App Interactive 360 Canvas -->
+            <div class="preview-360-container" id="preview360Container">
+              <div class="canvas-hint">Drag mouse or swipe to look around in 360°</div>
+            </div>
+
+            <div class="publish-actions mt-20">
+              <button class="btn btn-primary btn-large" id="btnStartProcessing">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Render & Publish 360 Package
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Box -->
+          <div class="card mt-20" id="progressCard" style="display:none;">
+            <h3 id="progressTitle">Processing Video...</h3>
+            <div class="progress-bar-wrap">
+              <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-info">
+              <span id="progressStepText">Initializing pipeline...</span>
+              <span id="progressPctText">0%</span>
+            </div>
+          </div>
+
+          <!-- Results Card -->
+          <div class="card mt-20" id="resultCard" style="display:none;">
+            <div class="result-header">
+              <div class="check-icon">✓</div>
+              <div>
+                <h3 id="resultTitle">Published & Ready to Share!</h3>
+                <p class="hint">Friends and family do NOT need any special apps to experience your 360 video.</p>
+              </div>
+            </div>
+
+            <div class="share-options-grid mt-20">
+              <div class="share-box">
+                <h4>1. Zero-App Web Link (iPhone/Android/PC)</h4>
+                <p class="hint">Open directly in Safari, Chrome, Edge with phone gyroscope & swipe controls.</p>
+                <div class="link-row">
+                  <input type="text" id="shareWebUrl" readonly>
+                  <button class="btn btn-secondary" id="btnOpenWeb">Open</button>
+                  <button class="btn btn-secondary" id="btnCopyWeb">Copy</button>
+                </div>
+              </div>
+
+              <div class="share-box">
+                <h4>2. YouTube 360 Ready Video</h4>
+                <p class="hint">Google Spatial Media 360 metadata is embedded. Upload as "Unlisted" to YouTube.</p>
+                <a id="btnDownloadMp4" class="btn btn-secondary" download>Download 360 MP4</a>
+              </div>
+
+              <div class="share-box">
+                <h4>3. Standalone Share Package (.zip)</h4>
+                <p class="hint">Self-contained web viewer bundle. Drag & drop to GitHub Pages, Netlify, or email.</p>
+                <a id="btnDownloadZip" class="btn btn-secondary" download>Download Web 360 Zip</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Bottom Navigation Footer -->
+      <footer class="wizard-footer">
+        <button class="btn btn-secondary" id="btnPrevStep" disabled>Back</button>
+        <button class="btn btn-primary" id="btnNextStep">Continue to Clean & Trim &rarr;</button>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
