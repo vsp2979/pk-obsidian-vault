@@ -14,6 +14,7 @@
 💬 MATRIX COMMANDS (Element / Element X)
 ─────────────────────────────────────────────────────────────────────────
 • Task Lists     : /list [name]  |  /add [list] [item]  |  /done [item]
+• Kanban Board   : /kanban (Live status of backlog, active, & completed tasks)
 • Reminders      : "Remind me [what] at [time/date]"
 • Parayan Status : /parayan status [group]  |  /parayan report [group]
 • Flight Scout   : "Find cheapest flights from [AUS] to [JFK] on [date]"
