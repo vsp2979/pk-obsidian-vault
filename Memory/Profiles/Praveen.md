@@ -17,3 +17,4 @@
 - Prefers concise, actionable summaries without boilerplate.
 - Manages executive travel (DFW hub) and Parayan multi-group coordination.
 - Active contributor to the Hermes self-evolution agent pipeline.
+

@@ -14,3 +14,4 @@
 ## Shared Preferences
 - Organic groceries and produce preferences for Costco runs.
 - Parayan reading community updates directed exclusively to the Cross-Check group.
+
