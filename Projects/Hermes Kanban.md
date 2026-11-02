@@ -27,7 +27,6 @@ kanban-plugin: basic
 - [ ] **Thursday Parayan Reading Monitor**: Polling 6 groups at 9:00 AM, 12:00 PM, and 5:00 PM - 8:00 PM CST every Thursday #parayan
 - [ ] **Daily Google Flights Watchdog**: Auditing DFW -> VGA/HYD/SFO/JFK fares daily at 8:00 AM CT via `flight_tracker.py` #travel
 - [ ] **Automotive Financing Deal Scout**: Daily scan for sub-3% APR financing and dealer cash rebates at 8:00 AM CT #deals
-- [ ] **Obsidian 5-Minute Vault Sync**: Continuous git rebase & push sync between VPS and Mac via `sync-vault.sh` #obsidian
 
 
 ## 🔍 Testing & Verification
@@ -39,6 +38,7 @@ kanban-plugin: basic
 
 ## ✅ Completed / Deployed
 
+- [x] **Obsidian 5-Minute Vault Sync**: Hardened with conflict recovery abort-trap, log rotation (capped at 1K lines), and 5-min cron rebase
 - [x] **Sub-Agent Modular Framework**: Built specialized agent hierarchy (`FamilyConciergeAgent`, `ParayanCoordinatorAgent`, `FinanceAuditorAgent`, `ResearchAgent`) in `agents/`
 - [x] **Matrix Conduit Server**: Running lightweight Conduit Matrix homeserver on port 6167 with Element X integration
 - [x] **WhatsApp Baileys Bridge**: Node.js bridge on port 5005 with privacy locks (drop DMs, whitelist family & parayan groups only)
