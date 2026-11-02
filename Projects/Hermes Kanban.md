@@ -38,6 +38,7 @@ kanban-plugin: basic
 
 ## ✅ Completed / Deployed
 
+- [x] **Multi-User / Family Profiles**: Auto-detection by Matrix handle & WhatsApp JID, with shared family shopping vs private isolated todos and scoped memory
 - [x] **Obsidian 5-Minute Vault Sync**: Hardened with conflict recovery abort-trap, log rotation (capped at 1K lines), and 5-min cron rebase
 - [x] **Sub-Agent Modular Framework**: Built specialized agent hierarchy (`FamilyConciergeAgent`, `ParayanCoordinatorAgent`, `FinanceAuditorAgent`, `ResearchAgent`) in `agents/`
 - [x] **Matrix Conduit Server**: Running lightweight Conduit Matrix homeserver on port 6167 with Element X integration
